@@ -1,6 +1,6 @@
 {
     "name": "visualappeal/laravel-database-influxdb",
-    "description": "A package for accessing InfluxDB from Laravel 5.5+, based on configuration settings.",
+    "description": "A package for accessing InfluxDB from Laravel 5.6+, based on configuration settings.",
     "keywords": [
         "influx",
         "influxdb",
@@ -28,11 +28,9 @@
         "laravel/framework": ">=5.6",
         "illuminate/log": ">=5.6",
         "illuminate/support": ">=5.6",
-        "influxdb/influxdb-php": "1.14.*",
-        "monolog/monolog": "1.24.*"
+        "influxdb/influxdb-php": "1.14.*"
     },
     "require-dev": {
-        "codeclimate/php-test-reporter": "dev-master",
         "phpunit/phpunit": "7.4.*"
     },
     "autoload": {

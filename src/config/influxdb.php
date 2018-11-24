@@ -4,9 +4,9 @@ return [
 
     'protocol' => env('INFLUXDB_PROTOCOL', 'http'),
 
-    'user' => env('INFLUXDB_USER', null),
+    'user' => env('INFLUXDB_USERNAME', null),
 
-    'pass' => env('INFLUXDB_PASS', null),
+    'pass' => env('INFLUXDB_PASSWORD', null),
 
     'host' => env('INFLUXDB_HOST', 'localhost'),
 
@@ -19,16 +19,6 @@ return [
         'enable' => env('INFLUXDB_QUEUE_ENABLE', false),
 
         'name' => env('INFLUXDB_QUEUE_NAME', 'default'),
-
-    ],
-
-    'log' => [
-
-        'monolog' => env('INFLUXDB_LOG_MONOLOG', false),
-
-        'level' => env('INFLUXDB_LOG_LEVEL', 'DEBUG'),
-
-        'limit' => env('INFLUXDB_LOG_LIMIT', 5),
 
     ],
 
