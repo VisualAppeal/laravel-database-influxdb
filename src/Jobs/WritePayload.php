@@ -1,19 +1,9 @@
 <?php
-/**
- * src/Jobs/WritePayload.php.
- *
- * @author      Austin Heap <me@austinheap.com>
- * @version     v0.1.7
- */
-declare(strict_types=1);
 
 namespace AustinHeap\Database\InfluxDb\Jobs;
 
 use AustinHeap\Database\InfluxDb\InfluxDbServiceProvider;
 
-/**
- * Class WritePayload.
- */
 class WritePayload extends Job
 {
     /**
@@ -65,8 +55,8 @@ class WritePayload extends Job
      * WritePayload constructor.
      *
      * @param  string|array $payload
-     * @param  string       $precision
-     * @param  string|null  $retentionPolicy
+     * @param  string $precision
+     * @param  string|null $retentionPolicy
      */
     public function __construct($payload, $precision = self::PRECISION_SECONDS, $retentionPolicy = null)
     {
@@ -76,8 +66,8 @@ class WritePayload extends Job
 
         parent::__construct(
             [
-                'payload'         => $this->payload,
-                'precision'       => $this->precision,
+                'payload' => $this->payload,
+                'precision' => $this->precision,
                 'retentionPolicy' => $this->retentionPolicy,
             ]
         );
@@ -85,15 +75,16 @@ class WritePayload extends Job
 
     /**
      * @return void
+     * @throws \InfluxDb\Exception
      */
     public function handle()
     {
         InfluxDbServiceProvider::getInstance()
-                               ->writePayload(
-                                   $this->payload,
-                                   $this->precision,
-                                   $this->retentionPolicy
-                               );
+            ->writePayload(
+                $this->payload,
+                $this->precision,
+                $this->retentionPolicy
+            );
     }
 
     /**
@@ -101,6 +92,6 @@ class WritePayload extends Job
      */
     public function tags(): array
     {
-        return [static::class.':'.(is_string($this->payload) ? 1 : count($this->payload))];
+        return [static::class . ':' . (is_string($this->payload) ? 1 : count($this->payload))];
     }
 }

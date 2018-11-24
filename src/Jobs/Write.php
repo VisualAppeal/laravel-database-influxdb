@@ -1,19 +1,9 @@
 <?php
-/**
- * src/Jobs/Write.php.
- *
- * @author      Austin Heap <me@austinheap.com>
- * @version     v0.1.7
- */
-declare(strict_types=1);
 
 namespace AustinHeap\Database\InfluxDb\Jobs;
 
 use AustinHeap\Database\InfluxDb\InfluxDbServiceProvider;
 
-/**
- * Class Write.
- */
 class Write extends Job
 {
     /**
@@ -29,7 +19,7 @@ class Write extends Job
     /**
      * Write constructor.
      *
-     * @param array        $parameters
+     * @param array $parameters
      * @param string|array $payload
      */
     public function __construct(array $parameters, $payload)
@@ -40,7 +30,7 @@ class Write extends Job
         parent::__construct(
             [
                 'parameters' => $parameters,
-                'payload'    => $payload,
+                'payload' => $payload,
             ]
         );
     }
@@ -51,10 +41,10 @@ class Write extends Job
     public function handle()
     {
         InfluxDbServiceProvider::getInstance()
-                               ->write(
-                                   $this->parameters,
-                                   $this->payload
-                               );
+            ->write(
+                $this->parameters,
+                $this->payload
+            );
     }
 
     /**
@@ -62,6 +52,6 @@ class Write extends Job
      */
     public function tags(): array
     {
-        return [static::class.':1'];
+        return [static::class . ':1'];
     }
 }

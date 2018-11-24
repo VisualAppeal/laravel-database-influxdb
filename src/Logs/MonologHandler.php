@@ -1,26 +1,16 @@
 <?php
-/**
- * src/Logs/MonologHandler.php.
- *
- * @author      Austin Heap <me@austinheap.com>
- * @version     v0.1.7
- */
-declare(strict_types=1);
 
 namespace AustinHeap\Database\InfluxDb\Logs;
 
 use Monolog\Logger;
 use Monolog\Handler\AbstractProcessingHandler;
 
-/**
- * Class MonologHandler.
- */
-class MonologHandler extends AbstractProcessingHandler
+class Handler extends AbstractProcessingHandler
 {
     /**
      * InfluxDbMonologHandler constructor.
      *
-     * @param int  $level
+     * @param int $level
      * @param bool $bubble
      */
     public function __construct($level = Logger::DEBUG, $bubble = true)

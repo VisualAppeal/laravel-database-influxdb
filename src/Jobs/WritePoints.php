@@ -1,19 +1,9 @@
 <?php
-/**
- * src/Jobs/WritePoints.php.
- *
- * @author      Austin Heap <me@austinheap.com>
- * @version     v0.1.7
- */
-declare(strict_types=1);
 
 namespace AustinHeap\Database\InfluxDb\Jobs;
 
 use AustinHeap\Database\InfluxDb\InfluxDbServiceProvider;
 
-/**
- * Class WritePoints.
- */
 class WritePoints extends Job
 {
     /**
@@ -65,8 +55,8 @@ class WritePoints extends Job
      * WritePoints constructor.
      *
      * @param  \InfluxDB\Point[] $points
-     * @param  string            $precision
-     * @param  string|null       $retentionPolicy
+     * @param  string $precision
+     * @param  string|null $retentionPolicy
      */
     public function __construct(array $points, $precision = self::PRECISION_SECONDS, $retentionPolicy = null)
     {
@@ -76,8 +66,8 @@ class WritePoints extends Job
 
         parent::__construct(
             [
-                'points'          => $this->points,
-                'precision'       => $this->precision,
+                'points' => $this->points,
+                'precision' => $this->precision,
                 'retentionPolicy' => $this->retentionPolicy,
             ]
         );
@@ -85,15 +75,16 @@ class WritePoints extends Job
 
     /**
      * @return void
+     * @throws \InfluxDb\Exception
      */
     public function handle()
     {
         InfluxDbServiceProvider::getInstance()
-                               ->writePoints(
-                                   $this->points,
-                                   $this->precision,
-                                   $this->retentionPolicy
-                               );
+            ->writePoints(
+                $this->points,
+                $this->precision,
+                $this->retentionPolicy
+            );
     }
 
     /**
@@ -101,6 +92,6 @@ class WritePoints extends Job
      */
     public function tags(): array
     {
-        return [static::class.':'.count($this->points)];
+        return [static::class . ':' . count($this->points)];
     }
 }

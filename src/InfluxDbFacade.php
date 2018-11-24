@@ -1,11 +1,4 @@
 <?php
-/**
- * src/InfluxDbFacade.php.
- *
- * @author      Austin Heap <me@austinheap.com>
- * @version     v0.1.7
- */
-declare(strict_types=1);
 
 namespace AustinHeap\Database\InfluxDb;
 
@@ -15,9 +8,6 @@ use AustinHeap\Database\InfluxDb\Jobs\Write;
 use AustinHeap\Database\InfluxDb\Jobs\WritePoints;
 use AustinHeap\Database\InfluxDb\Jobs\WritePayload;
 
-/**
- * Class InfluxDbFacade.
- */
 class InfluxDbFacade extends Facade
 {
     use InteractsWithQueue;
@@ -32,7 +22,7 @@ class InfluxDbFacade extends Facade
 
     /**
      * @param string $method
-     * @param array  $arguments
+     * @param array $arguments
      *
      * @return mixed
      */
@@ -45,7 +35,7 @@ class InfluxDbFacade extends Facade
                 return static::$method(...$arguments);
             default:
                 return static::getFacadeRoot()
-                             ->$method(...$arguments);
+                    ->$method(...$arguments);
         }
     }
 
@@ -59,10 +49,10 @@ class InfluxDbFacade extends Facade
     {
         if (config('influxdb.queue.enable', false) === true) {
             Write::dispatch($parameters, $payload)
-                 ->onQueue(config('influxdb.queue.name', 'default'));
+                ->onQueue(config('influxdb.queue.name', 'default'));
         } else {
             return static::getFacadeRoot()
-                         ->write($parameters, $payload);
+                ->write($parameters, $payload);
         }
 
         return true;
@@ -70,8 +60,8 @@ class InfluxDbFacade extends Facade
 
     /**
      * @param  string|array $payload
-     * @param  string       $precision
-     * @param  string|null  $retentionPolicy
+     * @param  string $precision
+     * @param  string|null $retentionPolicy
      *
      * @return bool
      */
@@ -79,13 +69,14 @@ class InfluxDbFacade extends Facade
         $payload,
         $precision = WritePayload::PRECISION_SECONDS,
         $retentionPolicy = null
-    ): bool {
+    ): bool
+    {
         if (config('influxdb.queue.enable', false) === true) {
             WritePayload::dispatch($payload, $precision, $retentionPolicy)
-                        ->onQueue(config('influxdb.queue.name', 'default'));
+                ->onQueue(config('influxdb.queue.name', 'default'));
         } else {
             return static::getFacadeRoot()
-                         ->writePayload($payload, $precision, $retentionPolicy);
+                ->writePayload($payload, $precision, $retentionPolicy);
         }
 
         return true;
@@ -93,8 +84,8 @@ class InfluxDbFacade extends Facade
 
     /**
      * @param  \InfluxDB\Point[] $points
-     * @param  string            $precision
-     * @param  string|null       $retentionPolicy
+     * @param  string $precision
+     * @param  string|null $retentionPolicy
      *
      * @return bool
      */
@@ -102,13 +93,14 @@ class InfluxDbFacade extends Facade
         array $points,
         $precision = WritePoints::PRECISION_SECONDS,
         $retentionPolicy = null
-    ): bool {
+    ): bool
+    {
         if (config('influxdb.queue.enable', false) === true) {
             WritePoints::dispatch($points, $precision, $retentionPolicy)
-                       ->onQueue(config('influxdb.queue.name', 'default'));
+                ->onQueue(config('influxdb.queue.name', 'default'));
         } else {
             return static::getFacadeRoot()
-                         ->writePoints($points, $precision, $retentionPolicy);
+                ->writePoints($points, $precision, $retentionPolicy);
         }
 
         return true;

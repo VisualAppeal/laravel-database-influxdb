@@ -1,19 +1,9 @@
 <?php
-/**
- * src/Logs/Formatter.php.
- *
- * @author      Austin Heap <me@austinheap.com>
- * @version     v0.1.7
- */
-declare(strict_types=1);
 
 namespace AustinHeap\Database\InfluxDb\Logs;
 
 use Monolog\Formatter\NormalizerFormatter;
 
-/**
- * Class Formatter.
- */
 class Formatter extends NormalizerFormatter
 {
     /**
@@ -83,15 +73,15 @@ class Formatter extends NormalizerFormatter
     {
         $tags = $this->prepareTags($record);
         $message = [
-            'name'      => 'Error',
-            'value'     => 1,
+            'name' => 'Error',
+            'value' => 1,
             'timestamp' => round(microtime(true) * 1000),
         ];
 
         if (count($tags)) {
             foreach ($tags as $key => $value) {
                 if (is_numeric($value)) {
-                    $message['fields'][$key] = (int) $value;
+                    $message['fields'][$key] = (int)$value;
                 }
             }
 

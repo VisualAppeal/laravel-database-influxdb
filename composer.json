@@ -1,5 +1,5 @@
 {
-    "name": "austinheap/laravel-database-influxdb",
+    "name": "visualappeal/laravel-database-influxdb",
     "description": "A package for accessing InfluxDB from Laravel 5.5+, based on configuration settings.",
     "keywords": [
         "influx",
@@ -17,18 +17,23 @@
             "email": "me@austinheap.com",
             "homepage": "https://github.com/austinheap",
             "role": "Developer"
+        },
+        {
+            "name": "Tim Helfensdörfer",
+            "email": "tim@visualappeal.de",
+            "homepage": "https://github.com/thelfensdrfer"
         }
     ],
     "require": {
-        "laravel/framework": "5.5.*|5.6.*",
-        "illuminate/log": "5.5.*|5.6.*",
-        "illuminate/support": "5.5.*|5.6.*",
-        "influxdb/influxdb-php": "^1.14.4",
-        "monolog/monolog": "~1.12"
+        "laravel/framework": ">=5.6",
+        "illuminate/log": ">=5.6",
+        "illuminate/support": ">=5.6",
+        "influxdb/influxdb-php": "1.14.*",
+        "monolog/monolog": "1.24.*"
     },
     "require-dev": {
         "codeclimate/php-test-reporter": "dev-master",
-        "phpunit/phpunit": "~6.0"
+        "phpunit/phpunit": "7.4.*"
     },
     "autoload": {
         "psr-4": {
